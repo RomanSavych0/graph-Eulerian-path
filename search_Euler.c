@@ -164,6 +164,7 @@ void startSearch(GRAPH* graph, _Bool directed)
     PATH *start, *end;//шлях який пройшов алгоритм
     int numOfPaths = 0;
 
+    puts("\tEulerian paths:");
 
     for(int i = 1, counter = 0; i <= graph->nNodes; i++)
     {

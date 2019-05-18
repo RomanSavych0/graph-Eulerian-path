@@ -6,7 +6,8 @@
 int main()
 {
     GRAPH graph;
-    readGraphKeyboard(&graph, 0);
+    //readGraphKeyboard(&graph, 0);
+    readGraphFile(&graph, 0);
     //setGraph(&graph, 0);
     //setHardWay(&graph, 0);
 

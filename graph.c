@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "graph.h"
+
 
 void initializeGraph(GRAPH* graph, _Bool direction, int nNodes, int nEdges)
 {
@@ -17,8 +19,6 @@ void initializeGraph(GRAPH* graph, _Bool direction, int nNodes, int nEdges)
 
 void readGraphKeyboard(GRAPH* graph, _Bool directed)
 {
-
-
     int x, y; //ребро від .. до ..
 
     printf("number of nodes: ");
@@ -42,7 +42,7 @@ void readGraphKeyboard(GRAPH* graph, _Bool directed)
 }
 void readGraphFile(GRAPH* graph, _Bool directed)
 {
-    /*
+
     printf("name of file: ");
     char nameOfFile[51];
     gets(nameOfFile);
@@ -59,19 +59,33 @@ void readGraphFile(GRAPH* graph, _Bool directed)
 
 
     ///////////////////опрацювати файл//////////////////
-    const SIZE = 11;
+    const int SIZE = 11;
     char buff[SIZE];
     //кількість вузлів
     fgets(buff, SIZE, file);
     int nNodes = (int)atoi(buff);
+    printf("number of nodes: %d\n", nNodes);
     //кількість ребер
+    fgets(buff, SIZE, file);
+    int nEdges = (int)atoi(buff);
+    printf("number of edges: %d\n", nEdges);
 
+    //ініціалізація графа
+    initializeGraph(graph, directed, nNodes, nEdges);
 
     //зчитати ребра
+    puts("Edges:");
+    while( fgets(buff, SIZE, file) != NULL )
+    {
+        int x = (int)atoi( strtok(buff, " ") );
+        int y = (int)atoi( strtok(NULL, " ") );
 
+        printf("\t(%d,%d)\n", x, y);
+        insertEdge(graph, x, y, directed);
+    }
 
     ////////////////////закрити файл/////////////////////
-    fclose(file);*/
+    fclose(file);
 }
 
 void insertEdge(GRAPH* graph, int x, int y, _Bool directed)
@@ -96,6 +110,7 @@ void insertEdge(GRAPH* graph, int x, int y, _Bool directed)
 void printGraph(GRAPH* graph)
 {
     EDGENODE* edge;
+    puts("<node's id>: <neighbor nodes>");
     for(int i = 1; i <= graph->nNodes; i++)
     {
         printf("%d: ", i);
