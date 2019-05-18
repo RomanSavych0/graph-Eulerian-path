@@ -1,0 +1,6 @@
+#folders
+.idea
+cmake-build-debug
+
+#files
+CMakeLists.txt
